@@ -7,7 +7,7 @@ This one is based on 5.83inch e-paper
 
 
 2. RapspberryPi 40-pin GPIO header  
-<img src="https://github.com/FrozRt/waveshare_epd/blob/master/pic/pins.png" />  
+<img src="https://github.com/FrozRt/waveshare_epd/blob/master/pic/gpio.png" />  
    
 
 3. Install dependencies  
