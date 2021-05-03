@@ -25,14 +25,14 @@ def epd_run(pic_path: str):
 
         logging.info("drawing on the horizontal image")
         font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
-        words = Image.new('1', (display.width, display.height), 255)
-        draw = ImageDraw.Draw(words)
+        image = Image.new('1', (display.width, display.height), 255)
+        draw = ImageDraw.Draw(image)
         draw.text((150, 200), "Let's check qr code displaying", font=font24, fill=0, align='left')
-        display.display(display.getbuffer(words))
+        display.display(display.getbuffer(image))
         time.sleep(2)
 
-        image = Image.new('1', (display.width, display.height), 255)
-        display.display(display.getbuffer(image))
+        white_back = Image.new('1', (display.width, display.height), 255)
+        image.paste(white_back)
 
         # Show qr code
         logging.info("Display image file on screen")
