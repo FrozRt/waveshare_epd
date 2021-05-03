@@ -17,11 +17,11 @@ try:
     display = epd5in83.EPD()
     display.init()
     display.Clear()  # 0: Black, 255: White
-    h = display.height
-    w = display.width
+    w = display.height
+    h = display.width
 
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
-    image = Image.new('1', (display.height, display.width), 255)
+    image = Image.new('1', (display.width, display.height), 255)
     draw = ImageDraw.Draw(image)
     draw.text((0, 0), "Let's check it", font=font24, fill=0, align='left')
     display.display(display.getbuffer(image))
