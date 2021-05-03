@@ -18,7 +18,7 @@ def epd_run(pic_path: str):
         logging.info("epd5in83")
 
         # Display init, clear
-        logging.info("init and clear")
+        logging.debug("Initialize screen")
         display = epd5in83.EPD()
         display.init()
         display.Clear()  # 0: Black, 255: White
@@ -27,18 +27,18 @@ def epd_run(pic_path: str):
         font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
         image = Image.new('1', (display.width, display.height), 255)
         draw = ImageDraw.Draw(image)
-        draw.text((0, 0), "Let's check it", font=font24, fill=0, align='left')
+        draw.text((150, 200), "Let's check qr code displaying", font=font24, fill=0, align='left')
         display.display(display.getbuffer(image))
         display.Clear()
 
         # Show Thanos image.
-        logging.info("show image during the 10 secs")
+        logging.info("Display image file on screen")
         thanos = Image.open(pic_path)
-        image.paste(thanos, (0, 0))
+        image.paste(thanos, (160, 80))
         display.display(display.getbuffer(image))  # Update display
-        time.sleep(10)
+        display.sleep()
 
-        logging.info("clear display")
+        logging.info("Clear screen")
         display.Clear()
 
     except IOError as e:
@@ -51,5 +51,5 @@ def epd_run(pic_path: str):
 
 
 if __name__ == '__main__':
-    test_path = os.path.join(picdir, '5in65_n5.bmp')
+    test_path = os.path.join(picdir, 'qr.jpg')
     epd_run(test_path)
