@@ -10,16 +10,18 @@ import logging
 from waveshare_epd import epd5in83
 import time
 from PIL import Image, ImageDraw, ImageFont
-import traceback
+
 
 try:
+    logging.info("epd5in83")
+
     # Display init, clear
+    logging.info("init and clear")
     display = epd5in83.EPD()
     display.init()
     display.Clear()  # 0: Black, 255: White
-    w = display.height
-    h = display.width
 
+    logging.info("drawing on the horizontal image")
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     image = Image.new('1', (display.width, display.height), 255)
     draw = ImageDraw.Draw(image)
@@ -28,11 +30,14 @@ try:
     display.Clear()
 
     # Show Thanos image.
+    logging.info("show image during the 10 secs")
     time.sleep(3)  # Pause for 3 seconds.
     thanos = Image.open(os.path.join(picdir, '5in65_n5.bmp'))
     image.paste(thanos, (0, 0))
     display.display(display.getbuffer(image))  # Update display
     time.sleep(10)
+
+    logging.info("clear display")
     display.Clear()
 
 except IOError as e:
