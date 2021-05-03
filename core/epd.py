@@ -25,22 +25,24 @@ def epd_run(pic_path: str):
 
         logging.info("drawing on the horizontal image")
         font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
-        image = Image.new('1', (display.width, display.height), 255)
-        draw = ImageDraw.Draw(image)
+        words = Image.new('1', (display.width, display.height), 255)
+        draw = ImageDraw.Draw(words)
         draw.text((150, 200), "Let's check qr code displaying", font=font24, fill=0, align='left')
-        display.display(display.getbuffer(image))
-        display.Clear()
-        time.sleep(3)
+        display.display(display.getbuffer(words))
+        time.sleep(2)
 
-        # Show Thanos image.
+        image = Image.new('1', (display.width, display.height), 255)
+        display.display(display.getbuffer(image))
+
+        # Show qr code
         logging.info("Display image file on screen")
         thanos = Image.open(pic_path)
         image.paste(thanos, (160, 80))
         display.display(display.getbuffer(image))  # Update display
-        display.sleep()
+        time.sleep(5)
 
-        logging.info("Clear screen")
-        display.Clear()
+#        logging.info("Clear screen")
+#        display.Clear()
 
     except IOError as e:
         print(e)
