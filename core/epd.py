@@ -11,6 +11,7 @@ from waveshare_epd import epd5in83
 import time
 from PIL import Image, ImageDraw, ImageFont
 
+logging.basicConfig(level=logging.DEBUG)
 
 try:
     logging.info("epd5in83")
@@ -42,3 +43,8 @@ try:
 
 except IOError as e:
     print(e)
+
+except KeyboardInterrupt:
+    logging.info("ctrl + c:")
+    epd5in83.epdconfig.module_exit()
+    exit()
