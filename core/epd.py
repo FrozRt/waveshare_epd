@@ -18,7 +18,7 @@ def epd_run(pic_path: str):
         logging.info("epd5in83")
 
         # Display init, clear
-        logging.info("init and clear")
+        logging.debug("Initialize screen")
         display = epd5in83.EPD()
         display.init()
         display.Clear()  # 0: Black, 255: White
@@ -33,13 +33,13 @@ def epd_run(pic_path: str):
         time.sleep(3)
 
         # Show Thanos image.
-        logging.info("show image during the 10 secs")
+        logging.info("Display image file on screen")
         thanos = Image.open(pic_path)
         image.paste(thanos, (160, 80))
         display.display(display.getbuffer(image))  # Update display
-        time.sleep(10)
+        display.sleep()
 
-        logging.info("clear display")
+        logging.info("Clear screen")
         display.Clear()
 
     except IOError as e:
