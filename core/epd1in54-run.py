@@ -8,7 +8,7 @@ picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__)
 libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
 if os.path.exists(libdir):
     sys.path.append(libdir)
-from waveshare_epd import epd1in54
+from waveshare_epd import epd1in54b
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -19,7 +19,7 @@ def epd_run(pic_path: str):
 
         # Display init, clear
         logging.debug("Initialize screen")
-        display = epd1in54.EPD()
+        display = epd1in54b.EPD()
         display.init(display.lut_full_update)
         display.Clear(255)
 
@@ -49,7 +49,7 @@ def epd_run(pic_path: str):
 
     except KeyboardInterrupt:
         logging.info("ctrl + c:")
-        epd1in54.epdconfig.module_exit()
+        epd1in54b.epdconfig.module_exit()
         exit()
 
 
