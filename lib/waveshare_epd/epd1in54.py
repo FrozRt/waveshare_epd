@@ -85,7 +85,7 @@ class EPD:
         self.send_data((y >> 8) & 0xFF)
         # self.ReadBusy()
 
-    def init(self, lut):
+    def init(self):
         if (epdconfig.module_init() != 0):
             return -1
         # EPD hardware init start
