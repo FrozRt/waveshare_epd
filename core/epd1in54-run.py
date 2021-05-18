@@ -20,8 +20,8 @@ def epd_run(pic_path: str):
         # Display init, clear
         logging.debug("Initialize screen")
         display = epd1in54.EPD()
-        display.init()
-        display.Clear()  # 0: Black, 255: White
+        display.init(display.lut_full_update)
+        display.Clear()
 
         logging.info("drawing on the horizontal image")
         font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
