@@ -20,15 +20,15 @@ def epd_run(pic_path: str):
         # Display init, clear
         logging.debug("Initialize screen")
         display = epd1in54b.EPD()
-        display.init(display.lut_full_update)
-        display.Clear(255)
+        display.init()
+        display.Clear()
 
         logging.info("drawing on the horizontal image")
         font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
         image = Image.new('1', (display.width, display.height), 255)
         draw = ImageDraw.Draw(image)
         draw.text((10, 10), "Hi, there!", font=font24, fill=0, align='left')
-        display.display(display.getbuffer(image))
+        display.display(display.getbuffer(image), redimage=None)
         time.sleep(2)
 
         white_back = Image.new('1', (display.width, display.height), 255)
@@ -38,7 +38,7 @@ def epd_run(pic_path: str):
         logging.info("Display image file on screen")
         thanos = Image.open(pic_path)
         image.paste(thanos, (0, 0))
-        display.display(display.getbuffer(image))  # Update display
+        display.display(display.getbuffer(image), redimage=None)  # Update display
         time.sleep(5)
 
 #        logging.info("Clear screen")
